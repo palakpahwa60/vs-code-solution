@@ -52,3 +52,83 @@ int main() {
     
     return 0;
 }
+
+//linear search
+
+#include <stdio.h>
+
+// Function to perform linear search
+// Returns the index if found, or -1 if not found
+int linearSearch(int arr[], int size, int target) {
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == target) {
+            return i; // Element found, return its index
+        }
+    }
+    return -1; // Element not found
+}
+
+int main() {
+    int data[] = {12, 45, 7, 93, 28, 51};
+    int size = sizeof(data) / sizeof(data[0]);
+    int target = 28;
+
+    int result = linearSearch(data, size, target);
+
+    if (result != -1) {
+        printf("Element %d found at index: %d\n", target, result);
+    } else {
+        printf("Element %d not found in the array.\n", target);
+    }
+
+    return 0;
+}
+
+
+
+//binary search
+#include <stdio.h>
+
+// Function returns index of target if found, otherwise returns -1
+int binarySearch(int arr[], int size, int target) {
+    int low = 0;
+    int high = size - 1;
+
+    while (low <= high) {
+        // Safe midpoint calculation to avoid integer overflow
+        int mid = low + (high - low) / 2;
+
+        // Check if target is present at mid
+        if (arr[mid] == target) {
+            return mid;
+        }
+        // If target is greater, ignore left half
+        if (arr[mid] < target) {
+            low = mid + 1;
+        }
+        // If target is smaller, ignore right half
+        else {
+            high = mid - 1;
+        }
+    }
+
+    // Element was not present in the array
+    return -1;
+}
+
+int main() {
+    // Array MUST be sorted
+    int arr[] = {2, 5, 8, 12, 16, 23, 38, 56, 72, 91};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    int target = 23;
+
+    int result = binarySearch(arr, size, target);
+
+    if (result != -1) {
+        printf("Element found at index %d\n", result);
+    } else {
+        printf("Element not found in the array\n");
+    }
+
+    return 0;
+}
