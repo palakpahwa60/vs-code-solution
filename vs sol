@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <stdbool.h> // Required for bool, true, and false
+
+// Function to perform an optimized bubble sort
+void bubbleSort(int arr[], int n) {
+    int temp;
+    bool swapped;
+    
+    // Outer loop controls the number of passes
+    for (int i = 0; i < n - 1; i++) {
+        swapped = false; // Reset flag at the start of each pass
+        
+        // Inner loop handles adjacent comparisons
+        // 'n - i - 1' avoids checking already sorted elements at the end
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                // Swap elements
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+                
+                swapped = true; // Mark that a swap occurred
+            }
+        }
+        
+        // If no two elements were swapped in the inner loop, break early
+        if (swapped == false) {
+            break;
+        }
+    }
+}
+
+// Function to print the array elements
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int arr[] = {64, 34, 25, 12, 22, 11, 90};
+    int n = sizeof(arr) / sizeof(arr[0]); // Dynamically calculate array size
+    
+    printf("Original array: \n");
+    printArray(arr, n);
+    
+    bubbleSort(arr, n);
+    
+    printf("Sorted array: \n");
+    printArray(arr, n);
+    
+    return 0;
+}
